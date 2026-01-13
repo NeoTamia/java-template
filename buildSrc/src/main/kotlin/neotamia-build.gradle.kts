@@ -7,6 +7,7 @@ plugins {
     `java-library`
     `maven-publish`
     idea
+    jacoco
     id("com.gradleup.shadow")
     id("com.diffplug.spotless")
 }
@@ -109,6 +110,15 @@ tasks.withType<Test>().configureEach {
             TestLogEvent.PASSED,
             TestLogEvent.SKIPPED
         )
+    }
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
 
