@@ -34,7 +34,7 @@
 #       Busybox and similar reduced shells will NOT work, because this script
 #       requires all of these POSIX shell features:
 #         * functions;
-#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}», 
+#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
 #           «${var#prefix}», «${var%suffix}», and «$( cmd )»;
 #         * compound commands having a testable exit status, especially «case»;
 #         * various built-in commands including «command», «set», and «ulimit».
@@ -49,11 +49,11 @@
 #       problems, so this is (mostly) avoided, by progressively accumulating
 #       options in "$@", and eventually passing that to Java.
 #
-#       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS, 
-#       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly; 
+#       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS,
+#       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly;
 #       see the in-line comments for details.
 #
-#       There are tweaks for specific operating systems such as AIX, CygWin, 
+#       There are tweaks for specific operating systems such as AIX, CygWin,
 #       Darwin, MinGW, and NonStop.
 #
 #   (3) This script is generated from the Groovy template
@@ -77,7 +77,7 @@ do
     ls=$( ls -ld "$app_path" )
     link=${ls#*' -> '}
     case $link in             #(
-      /*)   app_path=$link ;; #( 
+      /*)   app_path=$link ;; #(
       *)    app_path=$APP_HOME$link ;;
     esac
 done
@@ -108,10 +108,10 @@ msys=false
 darwin=false
 nonstop=false
 case "$( uname )" in                #(
-  CYGWIN* )         cygwin=true  ;; #( 
-  Darwin* )         darwin=true  ;; #( 
-  MSYS* | MINGW* )  msys=true    ;; #( 
-  NONSTOP* )        nonstop=true ;; 
+  CYGWIN* )         cygwin=true  ;; #(
+  Darwin* )         darwin=true  ;; #(
+  MSYS* | MINGW* )  msys=true    ;; #(
+  NONSTOP* )        nonstop=true ;;
 esac
 
 
@@ -143,16 +143,16 @@ fi
 
 # Increase the maximum file descriptors if we can.
 if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
-    case $MAX_FD in #( 
-      max*) 
+    case $MAX_FD in #(
+      max*)
         # In POSIX sh, ulimit -H is undefined. That's why the result is checked to see if it worked.
         # shellcheck disable=SC2039,SC3045
         MAX_FD=$( ulimit -H -n ) ||
             warn "Could not query maximum file descriptor limit"
     esac
-    case $MAX_FD in  #( 
-      '' | soft) :;; #( 
-      *) 
+    case $MAX_FD in  #(
+      '' | soft) :;; #(
+      *)
         # In POSIX sh, ulimit -n is undefined. That's why the result is checked to see if it worked.
         # shellcheck disable=SC2039,SC3045
         ulimit -n "$MAX_FD" ||
@@ -177,11 +177,10 @@ if "$cygwin" || "$msys" ; then
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
     for arg do
         if
-            case $arg in                                #( 
-              -*)   false ;;                            # don't mess with options #( 
-              /?*)  t=${arg#/}
-                    t=${t%%/*}
-                    [ -e "$t" ] ;;                      #( 
+            case $arg in                                #(
+              -*)   false ;;                            # don't mess with options #(
+              /?*)  t=${arg#/} t=/${t%%/*}              # looks like a POSIX filepath
+                    [ -e "$t" ] ;;                      #(
               *)    false ;;
             esac
         then
@@ -239,7 +238,7 @@ fi
 # an unmatched quote.
 #
 
-eval "set -- $( 
+eval "set -- $(
         printf '%s\n' "$DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS" |
         xargs -n1 |
         sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |
