@@ -12,7 +12,11 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-group = "re.neotamia.javatemplate"
+val baseGroup = "re.mineraiders.javatemplate"
+group = when {
+    project.path.startsWith(":modules:core") -> "$baseGroup.core"
+    else -> baseGroup
+}
 version = findProperty("version")!!
 
 repositories {
@@ -72,9 +76,9 @@ spotless {
     }
 }
 
-tasks.withType<ShadowJar> {
-    archiveClassifier.set("")
-}
+//tasks.withType<ShadowJar> {
+//    archiveClassifier.set("")
+//}
 
 val copyJars = tasks.register<Copy>("copyJars") {
     group = "publishing"
@@ -97,8 +101,9 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.named<Jar>("jar") {
-    archiveClassifier.set("stripped")
+tasks.withType<Jar> {
+    val moduleName = project.path.removePrefix(":modules:").replace(":", "-")
+    archiveBaseName.set("java-template-$moduleName")
 }
 
 tasks.withType<Test>().configureEach {
