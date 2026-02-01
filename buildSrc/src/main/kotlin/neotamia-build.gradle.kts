@@ -19,6 +19,12 @@ group = when {
 }
 version = findProperty("version")!!
 
+val moduleName = project.path.removePrefix(":modules").replace(":", "-")
+val baseName = if (moduleName == "-" || moduleName.isEmpty()) "java-template" else "java-template$moduleName"
+base {
+    archivesName.set(baseName)
+}
+
 repositories {
     mavenCentral()
     mavenLocal()
@@ -101,11 +107,6 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.withType<Jar> {
-    val moduleName = project.path.removePrefix(":modules:").replace(":", "-")
-    archiveBaseName.set("java-template-$moduleName")
-}
-
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 
@@ -147,7 +148,7 @@ project.afterEvaluate {
         publishing {
             publications {
                 create<MavenPublication>("mavenJava") {
-                    val kebabName = project.name.replace(Regex("(?<=[a-z])(?=[A-Z])"), "-").lowercase()
+                    val kebabName = baseName.replace(Regex("(?<=[a-z])(?=[A-Z])"), "-").lowercase()
                     artifactId = kebabName
                     pom {
                         name = "JavaTemplate ${project.name}"
