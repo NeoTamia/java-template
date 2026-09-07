@@ -1,13 +1,13 @@
 # Copied into generated repos. Each repo pulls this template with GITHUB_TOKEN
 # and opens a PR on itself. Nested templates keep extra keys via three_way.
 
-# Parent to pull from. Empty = GitHub templateRepository of this repo.
 source:
 source_ref:
 prefer_branch: dev
 
 identity:
   extra:
+    re.mineraiders.javatemplate: re.{owner_slug}.{slug}
     re.neotamia.javatemplate: re.{owner_slug}.{slug}
     neotamia-build: "{slug}-build"
   owner_files:
@@ -17,28 +17,28 @@ identity:
     - buildSrc/src/main/kotlin/*-build.gradle.kts
 
 overwrite:
+  - .github/workflows/template-sync.yml
+
+merge_toml:
+  - gradle/libs.versions.toml
+
+three_way:
   - .editorconfig
   - .github/renovate.json5
   - .github/workflows/build.yml
   - .github/workflows/lint.yml
   - .github/workflows/test.yml
   - .github/workflows/release-please.yml
-  - .github/workflows/template-sync.yml
   - .github/ISSUE_TEMPLATE/**
   - .github/PULL_REQUEST_TEMPLATE.md
   - gradle/wrapper/**
   - buildSrc/build.gradle.kts
   - buildSrc/settings.gradle.kts
+  - buildSrc/src/main/kotlin/*-build.gradle.kts
   - settings.gradle.kts
+  - gradle.properties
   - CODE_OF_CONDUCT.md
   - CONTRIBUTING.md
-
-merge_toml:
-  - gradle/libs.versions.toml
-
-three_way:
-  - buildSrc/src/main/kotlin/*-build.gradle.kts
-  - gradle.properties
   - AGENTS.md
   - .github/template-sync.yml
 
