@@ -12,7 +12,7 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-val baseGroup = "re.mineraiders.javatemplate"
+val baseGroup = "re.neotamia.javatemplate"
 group = when {
     project.path.startsWith(":modules:core") -> "$baseGroup.core"
     else -> baseGroup

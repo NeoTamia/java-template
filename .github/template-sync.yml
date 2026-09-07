@@ -8,7 +8,6 @@ prefer_branch: dev
 
 identity:
   extra:
-    re.mineraiders.javatemplate: re.{owner_slug}.{slug}
     re.neotamia.javatemplate: re.{owner_slug}.{slug}
     neotamia-build: "{slug}-build"
   owner_files:
