@@ -17,7 +17,6 @@ identity:
     - buildSrc/src/main/kotlin/*-build.gradle.kts
 
 overwrite:
-  - .github/workflows/template-sync.yml
 
 merge_toml:
   - gradle/libs.versions.toml
@@ -25,10 +24,6 @@ merge_toml:
 three_way:
   - .editorconfig
   - .github/renovate.json5
-  - .github/workflows/build.yml
-  - .github/workflows/lint.yml
-  - .github/workflows/test.yml
-  - .github/workflows/release-please.yml
   - .github/ISSUE_TEMPLATE/**
   - .github/PULL_REQUEST_TEMPLATE.md
   - gradle/wrapper/**
@@ -43,7 +38,7 @@ three_way:
   - .github/template-sync.yml
 
 exclude:
-  - .github/workflows/project-setup.yml
+  - .github/workflows/**
   - .github/template-sync-state.json
   - modules/**
   - README.md
